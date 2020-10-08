@@ -17,6 +17,6 @@ protected:
 	void Update();
 
 public:
-	void SetVSBUffer(UINT slot);
-	void SetPSBUffer(UINT slot);
+	void SetVSBuffer(UINT slot);
+	void SetPSBuffer(UINT slot);
 };

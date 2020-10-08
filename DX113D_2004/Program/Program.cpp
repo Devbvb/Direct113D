@@ -7,8 +7,8 @@ Program::Program()
 {
 	Create();
 
-	//scene = new CubeScene();
-	scene = new CubetestScene();
+	scene = new CubeScene();
+	//scene = new CubetestScene();
 }
 
 Program::~Program()
@@ -31,21 +31,28 @@ void Program::PreRender()
 void Program::Render()
 {
 	Device::Get()->SetRenderTarget();
+	Enviroment::Get()->SetViewport();
+	Enviroment::Get()->SetViewProjection();
 
 	scene->Render();
 }
 
 void Program::PostRender()
 {
+	Enviroment::Get()->PostRender();
+
 	scene->PostRender();
 }
 
 void Program::Create()
 {
 	Device::Get();
+	Enviroment::Get();
 }
 
 void Program::Delete()
 {
+	Enviroment::Delete();
+	Shader::Delete();
 	Device::Delete();
 }

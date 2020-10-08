@@ -24,13 +24,13 @@ void ConstBuffer::Update()
 	DC->Unmap(buffer, 0);
 }
 
-void ConstBuffer::SetVSBUffer(UINT slot)
+void ConstBuffer::SetVSBuffer(UINT slot)
 {
 	Update();
 	DC->VSSetConstantBuffers(slot, 1, &buffer);
 }
 
-void ConstBuffer::SetPSBUffer(UINT slot)
+void ConstBuffer::SetPSBuffer(UINT slot)
 {
 
 	Update();

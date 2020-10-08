@@ -3,17 +3,9 @@
 class CubeScene : public Scene
 {
 private:
-	VertexShader* vertexShader;
-	PixelShader* pixelShader;
-
-	VertexBuffer* vertexBuffer;
-	IndexBuffer* indexBuffer;
-
-	MatrixBuffer* worldBuffer;
-	MatrixBuffer* viewBuffer;
-	MatrixBuffer* projectionBuffer;
-
-	Matrix world;
+	Cube* sun;
+	Cube* earth;
+	Cube* moon;
 
 public:
 	CubeScene();
@@ -23,7 +15,5 @@ public:
 	virtual void PreRender() override;
 	virtual void Render() override;
 	virtual void PostRender() override;
-
-	void SetViewport();
 };
 

@@ -36,7 +36,7 @@ void CubetestScene::Update()
 {
 	cube->Update();
 
-	worldBuffer->Set(cube->world);
+	//worldBuffer->Set(cube->world);
 }
 
 void CubetestScene::PreRender()
@@ -45,9 +45,9 @@ void CubetestScene::PreRender()
 
 void CubetestScene::Render()
 {
-	worldBuffer->SetVSBUffer(0);
-	viewBuffer->SetVSBUffer(1);
-	projectionBuffer->SetVSBUffer(2);
+	worldBuffer->SetVSBuffer(0);
+	viewBuffer->SetVSBuffer(1);
+	projectionBuffer->SetVSBuffer(2);
 
 	cube->Render();
 }

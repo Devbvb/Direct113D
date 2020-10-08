@@ -59,18 +59,22 @@ using namespace Utility;
 #include "Framework/Shader/VertexShader.h"
 #include "Framework/Shader/PixelShader.h"
 
-
 #include "Framework/Buffer/VertexBuffer.h"
 #include "Framework/Buffer/IndexBuffer.h"
 #include "Framework/Buffer/ConstBuffer.h"
 #include "Framework/Buffer/VertexLayouts.h"
 #include "Framework/Buffer/GlobalBuffers.h"
 
+#include "Framework/Render/Mesh.h"
+#include "Framework/Render/Material.h"
 
+#include "Framework/Math/Vector3.h"
+#include "Framework/Math/Transform.h"
+
+#include "Enviroment/Eviroment.h"	
 
 //Object Header
-#include "Object/Cube.h"
-
+#include "Objects/Basic/Cube.h"
 
 
 //Scene Header
