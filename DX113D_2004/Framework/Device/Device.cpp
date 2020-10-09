@@ -59,17 +59,42 @@ void Device::CreateBackBuffer()
 	V(device->CreateRenderTargetView(backBuffer, nullptr, &renderTargetView));
 	backBuffer->Release();
 
-	SetRenderTarget();
+	ID3D11Texture2D* depthBuffer;
+
+	{
+		D3D11_TEXTURE2D_DESC desc = {};
+		desc.Width = WIN_WIDTH;
+		desc.Height = WIN_HEIGHT;
+		desc.MipLevels = 1;
+		desc.ArraySize = 1;
+		desc.Format = DXGI_FORMAT_D24_UNORM_S8_UINT;
+		desc.SampleDesc.Count = 1;
+		desc.SampleDesc.Quality = 0;
+		desc.Usage = D3D11_USAGE_DEFAULT;
+		desc.BindFlags = D3D11_BIND_DEPTH_STENCIL;
+
+		V(device->CreateTexture2D(&desc, nullptr, &depthBuffer));
+	}
+
+	{
+		D3D11_DEPTH_STENCIL_VIEW_DESC desc = {};
+		desc.Format = DXGI_FORMAT_D24_UNORM_S8_UINT;
+		desc.ViewDimension = D3D11_DSV_DIMENSION_TEXTURE2D;
+
+		V(device->CreateDepthStencilView(depthBuffer, &desc, &depthStencilView));
+		depthBuffer->Release();
+	}
 }
 
 void Device::SetRenderTarget()
 {
-	deviceContext->OMSetRenderTargets(1, &renderTargetView, nullptr);
+	deviceContext->OMSetRenderTargets(1, &renderTargetView, depthStencilView);
 }
 
 void Device::Clear(Float4 color)
 {
 	deviceContext->ClearRenderTargetView(renderTargetView, (float*)&color);
+	deviceContext->ClearDepthStencilView(depthStencilView, D3D11_CLEAR_DEPTH, 1.0f, 0);
 }
 
 void Device::Present()

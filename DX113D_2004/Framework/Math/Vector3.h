@@ -27,4 +27,47 @@ public:
 	_declspec(property(get = GetY, put = SetY)) float y;
 	_declspec(property(get = GetZ, put = SetZ)) float z;
 	_declspec(property(get = GetW, put = SetW)) float w;
+
+	Vector3 operator+ (const Vector3 & value) const;
+	Vector3 operator- (const Vector3 & value) const;
+	Vector3 operator* (const Vector3 & value) const;
+	Vector3 operator/ (const Vector3 & value) const;
+
+	void operator+= (const Vector3& value);
+	void operator-= (const Vector3& value);
+	void operator*= (const Vector3& value);
+	void operator/= (const Vector3& value);
+
+	Vector3 operator+ (const float& value) const;
+	Vector3 operator- (const float& value) const;
+	Vector3 operator* (const float& value) const;
+	Vector3 operator/ (const float& value) const;
+
+	void operator+= (const float& value);
+	void operator-= (const float& value);
+	void operator*= (const float& value);
+	void operator/= (const float& value);
+
+	friend Vector3 operator+(const float value1, const Vector3& value2);
+	friend Vector3 operator-(const float value1, const Vector3& value2);
+	friend Vector3 operator*(const float value1, const Vector3& value2);
+	friend Vector3 operator/(const float value1, const Vector3& value2);
+
+	friend Vector3 operator+(const Float3 value1, const Vector3& value2);
+	friend Vector3 operator-(const Float3 value1, const Vector3& value2);
+	friend Vector3 operator*(const Float3 value1, const Vector3& value2);
+	friend Vector3 operator/(const Float3 value1, const Vector3& value2);
+
+	bool operator == (const Vector3& value) const;
+
+	float Length() const;
+
+	Vector3 Noraml() const;
+	void Normalize();
+
+	Vector3 Cross(const Vector3& value) const;
+	float Dot(const Vector3& value) const;
+
+	static Vector3 Cross(const Vector3& vec1, const Vector3& vec2);
+	static float Dot(const Vector3& vec1, const Vector3& vec2);
 };

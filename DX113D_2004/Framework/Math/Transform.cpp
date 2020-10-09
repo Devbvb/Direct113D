@@ -24,8 +24,8 @@ void Transform::UpdateWorld()
 	if (parent != nullptr)
 		world *= *parent;
 
-	XMMatrixDecompose(&globalPosition.data, &globalRotation.data,
-		&globalScale.data, world);
+	XMMatrixDecompose(&globalScale.data, &globalRotation.data,
+		&globalPosition.data, world);
 
 	worldBuffer->Set(world);
 }
@@ -33,4 +33,19 @@ void Transform::UpdateWorld()
 void Transform::SetWorldBuffer(UINT slot)
 {
 	worldBuffer->SetVSBuffer(slot);
+}
+
+Vector3 Transform::Forward()
+{
+	return XMVector3Normalize(XMVector3TransformNormal(kForward, world));
+}
+
+Vector3 Transform::Up()
+{
+	return XMVector3Normalize(XMVector3TransformNormal(kUp, world));
+}
+
+Vector3 Transform::Right()
+{
+	return XMVector3Normalize(XMVector3TransformNormal(kRight, world));
 }

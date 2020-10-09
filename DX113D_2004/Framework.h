@@ -12,6 +12,14 @@
 #define WIN_START_X 30
 #define WIN_START_Y 30
 
+#define PI 3.141592f
+
+#define LERP(s, e, t) (s + (e - s) * t)
+
+#define KEY_DOWN(k) Keyboard::Get()->Down(k)
+#define KEY_PRESS(k) Keyboard::Get()->Press(k)
+#define KEY_UP(k) Keyboard::Get()->Up(k)
+
 #ifdef NDEBUG
 	#define V(hr) hr
 #else 
@@ -37,6 +45,9 @@
 #pragma comment(lib, "d3dcompiler.lib")
 #pragma comment(lib, "dxguid.lib") 
 
+//DirectXTex
+#include "../DirectXTex/DirectXTex.h"
+
 using namespace DirectX;
 using namespace std;
 
@@ -46,10 +57,14 @@ typedef XMFLOAT2 Float2;
 typedef XMVECTOR Vector4;
 typedef XMMATRIX Matrix;
 
+const XMVECTORF32 kRight = { 1, 0, 0 };
+const XMVECTORF32 kUp = { 0, 1, 0 };
+const XMVECTORF32 kForward = { 0, 0, 1 };
 
 //Framework Header
 #include "Framework/Utility/Utility.h"
 #include "Framework/Utility/Singleton.h"
+#include "Framework/Utility/Keyboard.h"
 
 using namespace Utility;
 
@@ -67,9 +82,14 @@ using namespace Utility;
 
 #include "Framework/Render/Mesh.h"
 #include "Framework/Render/Material.h"
+#include "Framework/Render/Texture.h"
 
 #include "Framework/Math/Vector3.h"
 #include "Framework/Math/Transform.h"
+
+#include "Framework/State/RasterizerState.h"
+
+#include "Framework/Camera/Camera.h"
 
 #include "Enviroment/Eviroment.h"	
 
@@ -82,3 +102,5 @@ using namespace Utility;
 #include "Program/Program.h"
 
 extern HWND hWnd; //전역변수 다른곳에 쓸 수 있음
+extern Vector3 mousePos;
+extern short mouseWheel;

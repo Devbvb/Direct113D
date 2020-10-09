@@ -9,6 +9,8 @@ private:
 	IDXGISwapChain* swapChain;
 	ID3D11RenderTargetView* renderTargetView;
 
+	ID3D11DepthStencilView* depthStencilView;
+
 public:
 	Device();
 	~Device();

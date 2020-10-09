@@ -17,3 +17,9 @@ struct VertexColor
 	Float3 position;
 	Float4 color;
 };
+
+struct VertexUV
+{
+	Float3 position;
+	Float2 uv;
+};

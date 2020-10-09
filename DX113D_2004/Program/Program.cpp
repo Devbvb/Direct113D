@@ -2,13 +2,15 @@
 
 #include "Scene/CubeScene.h"
 #include "Scene/CubetestScene.h"
+#include "Scene/GridScene.h"
 
 Program::Program()
 {
 	Create();
 
-	scene = new CubeScene();
+	//scene = new CubeScene();
 	//scene = new CubetestScene();
+	scene = new GridScene();
 }
 
 Program::~Program()
@@ -20,7 +22,11 @@ Program::~Program()
 
 void Program::Update()
 {
+	Keyboard::Get()->Update();
+
 	scene->Update();
+
+	Camera::Get()->Update();
 }
 
 void Program::PreRender()
@@ -34,6 +40,9 @@ void Program::Render()
 	Enviroment::Get()->SetViewport();
 	Enviroment::Get()->SetViewProjection();
 
+	Camera::Get()->SetViewport();
+	Camera::Get()->SetOrthographic();
+
 	scene->Render();
 }
 
@@ -42,6 +51,8 @@ void Program::PostRender()
 	Enviroment::Get()->PostRender();
 
 	scene->PostRender();
+	
+	Camera::Get()->PostRender();
 }
 
 void Program::Create()
@@ -53,6 +64,9 @@ void Program::Create()
 void Program::Delete()
 {
 	Enviroment::Delete();
+	Keyboard::Delete();
+	Camera::Delete();
+	Texture::Delete();
 	Shader::Delete();
 	Device::Delete();
 }

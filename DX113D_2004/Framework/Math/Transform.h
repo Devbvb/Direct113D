@@ -29,7 +29,14 @@ public:
 
 	void SetWorldBuffer(UINT slot = 0);
 
-	//////////
-	void SetParent(Matrix* matrix) { parent = matrix; }
-	Matrix* GetMatrix() { return &world; }
+	void SetParent(Matrix* value) { parent = value; }
+	Matrix* GetWorld() { return &world; }
+
+	Vector3 Forward();
+	Vector3 Up();
+	Vector3 Right();
+
+	Vector3 GlobalPos() { return globalPosition; }
+	Vector3 GlobalRot() { return globalRotation; }
+	Vector3 GlobalScale() { return globalScale; }
 };

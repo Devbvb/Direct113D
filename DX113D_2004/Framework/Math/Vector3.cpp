@@ -67,3 +67,153 @@ float Vector3::GetW()
 {
 	return XMVectorGetW(data);
 }
+
+Vector3 Vector3::operator+(const Vector3& value) const
+{
+	return Vector3(data + value.data);
+}
+
+Vector3 Vector3::operator-(const Vector3& value) const
+{
+	return Vector3(data - value.data);
+}
+
+Vector3 Vector3::operator*(const Vector3& value) const
+{
+	return Vector3(data * value.data);
+}
+
+Vector3 Vector3::operator/(const Vector3& value) const
+{
+	return Vector3(data / value.data);
+}
+
+void Vector3::operator+=(const Vector3& value)
+{
+	data += value.data;
+}
+
+void Vector3::operator-=(const Vector3& value)
+{
+	data -= value.data;
+}
+
+void Vector3::operator*=(const Vector3& value)
+{
+	data *= value.data;
+}
+
+void Vector3::operator/=(const Vector3& value)
+{
+	data /= value.data;
+}
+
+Vector3 Vector3::operator+(const float& value) const
+{
+	return data + XMVectorReplicate(value); //value값을 가진 각항을 가진 벡터를 만들어준다.
+}
+
+Vector3 Vector3::operator-(const float& value) const
+{
+	return data - XMVectorReplicate(value);
+}
+
+Vector3 Vector3::operator*(const float& value) const
+{
+	return data * XMVectorReplicate(value);
+}
+
+Vector3 Vector3::operator/(const float& value) const
+{
+	return data / XMVectorReplicate(value);
+}
+
+void Vector3::operator+=(const float& value)
+{
+	data += XMVectorReplicate(value);
+}
+
+void Vector3::operator-=(const float& value)
+{
+	data -= XMVectorReplicate(value);
+}
+
+void Vector3::operator*=(const float& value)
+{
+	data *= XMVectorReplicate(value);
+}
+
+void Vector3::operator/=(const float& value)
+{
+	data /= XMVectorReplicate(value);
+}
+
+Vector3 operator+(const float value1, const Vector3& value2)
+{
+	return XMVectorReplicate(value1) + value2.data;
+}
+
+Vector3 operator-(const float value1, const Vector3& value2)
+{
+	return XMVectorReplicate(value1) - value2.data;
+}
+
+Vector3 operator*(const float value1, const Vector3& value2)
+{
+	return XMVectorReplicate(value1) * value2.data;
+}
+
+Vector3 operator/(const float value1, const Vector3& value2)
+{
+	return XMVectorReplicate(value1) / value2.data;
+}
+
+Vector3 operator+(const Float3 value1, const Vector3& value2)
+{
+	return value2 + value1;
+}
+
+Vector3 operator-(const Float3 value1, const Vector3& value2)
+{
+	return value2 - value1;
+}
+
+Vector3 operator*(const Float3 value1, const Vector3& value2)
+{
+	return value2 * value1;
+}
+
+Vector3 operator/(const Float3 value1, const Vector3& value2)
+{
+	return value2 / value1;
+}
+
+bool Vector3::operator==(const Vector3& value) const
+{
+	return XMVector3Equal(data, value.data);
+}
+
+float Vector3::Length() const
+{
+	return XMVectorGetX(XMVector3Length(data));
+}
+
+Vector3 Vector3::Noraml() const
+{
+	return XMVector3Normalize(data);
+}
+
+void Vector3::Normalize()
+{
+	data = XMVector3Normalize(data);
+}
+
+Vector3 Vector3::Cross(const Vector3& vec1, const Vector3& vec2)
+{
+	return XMVector3Cross(vec1.data, vec2.data);
+}
+
+float Vector3::Dot(const Vector3& vec1, const Vector3& vec2)
+{
+	return XMVectorGetX(XMVector3Dot(vec1.data, vec2.data));
+}

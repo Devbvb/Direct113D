@@ -36,8 +36,8 @@ void Enviroment::SetViewport(UINT width, UINT height)
 void Enviroment::CreatePerspective()
 {
 
-	XMVECTOR eye = XMVectorSet(5, 30, -20, 0); //카메라 위치
-	XMVECTOR focus = XMVectorSet(0, 0, 0, 0); // 카메라가 바라보는 위치
+	XMVECTOR eye = XMVectorSet(5, 7, -7, 0); //카메라 위치
+	XMVECTOR focus = XMVectorSet(5, 0, 5, 0); // 카메라가 바라보는 위치
 	XMVECTOR up = XMVectorSet(0, 1, 0, 0); // 카메라의 업벡터
 
 	Matrix view = XMMatrixLookAtLH(eye, focus, up);
