@@ -1,6 +1,6 @@
 #pragma once
 
-class Material //버텍스 픽셀 셰이더 합친 프레임워크
+class Material
 {
 private:
 	VertexShader* vertexShader;

@@ -1,7 +1,6 @@
 #include "Framework.h"
 
 #include "Scene/CubeScene.h"
-#include "Scene/CubetestScene.h"
 #include "Scene/GridScene.h"
 
 Program::Program()
@@ -9,7 +8,6 @@ Program::Program()
 	Create();
 
 	//scene = new CubeScene();
-	//scene = new CubetestScene();
 	scene = new GridScene();
 }
 
@@ -22,11 +20,14 @@ Program::~Program()
 
 void Program::Update()
 {
-	Keyboard::Get()->Update();
+	Control::Get()->Update();
+	Timer::Get()->Update();
 
 	scene->Update();
 
-	Camera::Get()->Update();
+	CAMERA->Update();
+
+	Control::Get()->SetWheel(0.0f);
 }
 
 void Program::PreRender()
@@ -37,35 +38,54 @@ void Program::PreRender()
 void Program::Render()
 {
 	Device::Get()->SetRenderTarget();
-	Enviroment::Get()->SetViewport();
-	Enviroment::Get()->SetViewProjection();
-
-	Camera::Get()->SetViewport();
-	Camera::Get()->SetOrthographic();
+	Environment::Get()->Set();
 
 	scene->Render();
 }
 
 void Program::PostRender()
 {
-	Enviroment::Get()->PostRender();
+	DirectWrite::Get()->GetDC()->BeginDraw();
+
+	ImGui_ImplDX11_NewFrame();
+	ImGui_ImplWin32_NewFrame();
+	ImGui::NewFrame();
+
+	wstring fps = L"FPS : " + to_wstring((int)Timer::Get()->GetFPS());
+	RECT rect = { 0, 0, 100, 100 };
+	DirectWrite::Get()->RenderText(fps, rect);
+
+	Environment::Get()->PostRender();
 
 	scene->PostRender();
-	
-	Camera::Get()->PostRender();
+
+	DirectWrite::Get()->GetDC()->EndDraw();
+
+	ImGui::Render();
+	ImGui_ImplDX11_RenderDrawData(ImGui::GetDrawData());
 }
 
 void Program::Create()
 {
 	Device::Get();
-	Enviroment::Get();
+	Environment::Get();
+	Control::Get();
+	Timer::Get();
+	DirectWrite::Get();
+
+	ImGui::CreateContext();
+	ImGui::StyleColorsDark();
+
+	ImGui_ImplWin32_Init(hWnd);
+	ImGui_ImplDX11_Init(DEVICE, DC);
 }
 
 void Program::Delete()
 {
-	Enviroment::Delete();
-	Keyboard::Delete();
-	Camera::Delete();
+	DirectWrite::Delete();
+	Timer::Delete();
+	Control::Delete();
+	Environment::Delete();
 	Texture::Delete();
 	Shader::Delete();
 	Device::Delete();

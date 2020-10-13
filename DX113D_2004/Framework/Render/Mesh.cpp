@@ -12,7 +12,7 @@ Mesh::~Mesh()
 	delete indexBuffer;
 }
 
-void Mesh::IASet(D3D11_PRIMITIVE_TOPOLOGY primitiveType)  
+void Mesh::IASet(D3D11_PRIMITIVE_TOPOLOGY primitiveType)
 {
 	vertexBuffer->IASet();
 	indexBuffer->IASet();

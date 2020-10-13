@@ -5,14 +5,13 @@ class Cube : public Transform
 private:
 	typedef VertexColor VertexType;
 
-	Material* material; // 셰이더 두개 합친것
-	Mesh* mesh; //버퍼 두개를 합친것
+	Material* material;
+	Mesh* mesh;
 
-	
 	vector<VertexType> vertices;
 	vector<UINT> indices;
 public:
-	Cube();
+	Cube();	
 	~Cube();
 
 	void Update();

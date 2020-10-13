@@ -1,6 +1,6 @@
 #pragma once
 
-class Mesh // 버텍스와 인덱스 (폴리곤의 집합)
+class Mesh
 {
 private:
 	VertexBuffer* vertexBuffer;

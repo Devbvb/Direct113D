@@ -1,7 +1,6 @@
 #pragma once
 
-template <typename T> 
-
+template <typename T>
 class Singleton
 {
 protected:
@@ -11,7 +10,7 @@ public:
 	static T* Get()
 	{
 		if (instance == nullptr)
-			instance = new T;
+			instance = new T();
 
 		return instance;
 	}
@@ -22,5 +21,5 @@ public:
 	}
 };
 
-template <typename T>
+template<typename T>
 T* Singleton<T>::instance = nullptr;

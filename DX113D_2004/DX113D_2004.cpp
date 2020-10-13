@@ -12,9 +12,6 @@ HWND hWnd;
 WCHAR szTitle[MAX_LOADSTRING];                  // 제목 표시줄 텍스트입니다.
 WCHAR szWindowClass[MAX_LOADSTRING];            // 기본 창 클래스 이름입니다.
 
-Vector3 mousePos;
-short mouseWheel;
-
 // 이 코드 모듈에 포함된 함수의 선언을 전달합니다:
 ATOM                MyRegisterClass(HINSTANCE hInstance);
 BOOL                InitInstance(HINSTANCE, int);
@@ -44,10 +41,10 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 
     HACCEL hAccelTable = LoadAccelerators(hInstance, MAKEINTRESOURCE(IDC_DX113D2004));
 
-    MSG msg = {};
+    MSG msg = {};    
 
     Program* program = new Program();
-
+    
     while (msg.message != WM_QUIT)
     {
         if (PeekMessage(&msg, nullptr, 0, 0, PM_REMOVE))
@@ -70,8 +67,8 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
             program->PostRender();
 
             Device::Get()->Present();
-        }
-    }
+        }        
+    }   
 
     delete program;
 
@@ -124,7 +121,7 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
    AdjustWindowRect(&rc, WS_OVERLAPPEDWINDOW, false);
 
    hWnd = CreateWindowW(szWindowClass, szTitle, WS_OVERLAPPEDWINDOW,
-      WIN_START_X, WIN_START_Y, 
+      WIN_START_X, WIN_START_Y,
        rc.right - rc.left, rc.bottom - rc.top,
        nullptr, nullptr, hInstance, nullptr);
 
@@ -141,18 +138,13 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
    return TRUE;
 }
 
-//
-//  함수: WndProc(HWND, UINT, WPARAM, LPARAM)
-//
-//  용도: 주 창의 메시지를 처리합니다.
-//
-//  WM_COMMAND  - 애플리케이션 메뉴를 처리합니다.
-//  WM_PAINT    - 주 창을 그립니다.
-//  WM_DESTROY  - 종료 메시지를 게시하고 반환합니다.
-//
-//
+extern IMGUI_IMPL_API LRESULT ImGui_ImplWin32_WndProcHandler(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam);
+
 LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 {
+    if (ImGui_ImplWin32_WndProcHandler(hWnd, message, wParam, lParam))
+        return true;
+
     switch (message)
     {
     case WM_COMMAND:
@@ -172,6 +164,15 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
             }
         }
         break;
+    case WM_MOUSEMOVE:
+        Control::Get()->SetMouse(lParam);
+        break;
+    case WM_MOUSEWHEEL:
+    {
+        short value = (short)HIWORD(wParam);
+        Control::Get()->SetWheel((float)value);
+    }
+        break;
     case WM_PAINT:
         {
             PAINTSTRUCT ps;
@@ -179,13 +180,6 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
             // TODO: 여기에 hdc를 사용하는 그리기 코드를 추가합니다...
             EndPaint(hWnd, &ps);
         }
-        break;
-    case WM_MOUSEMOVE:
-        mousePos.x = (float)LOWORD(lParam);
-        mousePos.y = WIN_HEIGHT - (float)HIWORD(lParam);
-        break;
-    case WM_MOUSEWHEEL:
-        mouseWheel = (short)HIWORD(wParam);
         break;
     case WM_DESTROY:
         PostQuitMessage(0);

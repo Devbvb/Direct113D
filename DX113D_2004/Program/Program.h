@@ -8,13 +8,13 @@ private:
 public:
 	Program();
 	~Program();
-	
+
 	void Update();
+
 	void PreRender();
 	void Render();
-	void PostRender();
+	void PostRender();	
 
 	void Create();
 	void Delete();
 };
-

@@ -20,8 +20,8 @@
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
-    <ProjectGuid>{C47FA4AB-1C19-4363-B177-3B8AC1987E10}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
+    <ProjectGuid>{234b7493-27d3-462f-a9a5-39106bdf951e}</ProjectGuid>
     <RootNamespace>DX113D2004</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
@@ -73,48 +73,24 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
   </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <LinkIncremental>true</LinkIncremental>
-  </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <LinkIncremental>true</LinkIncremental>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
-      <PrecompiledHeader>Use</PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <PrecompiledHeaderFile>Framework.h</PrecompiledHeaderFile>
-      <AdditionalIncludeDirectories>./</AdditionalIncludeDirectories>
-    </ClCompile>
-    <Link>
-      <SubSystem>Windows</SubSystem>
-      <GenerateDebugInformation>true</GenerateDebugInformation>
-    </Link>
-    <FxCompile>
-      <EntryPointName>VS</EntryPointName>
-    </FxCompile>
-    <FxCompile>
-      <ShaderType>Effect</ShaderType>
-    </FxCompile>
-    <FxCompile>
-      <ShaderModel>5.0</ShaderModel>
-    </FxCompile>
-  </ItemDefinitionGroup>
-  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <ClCompile>
       <PrecompiledHeader>Use</PrecompiledHeader>
-      <WarningLevel>Level3</WarningLevel>
-      <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>./</AdditionalIncludeDirectories>
       <PrecompiledHeaderFile>Framework.h</PrecompiledHeaderFile>
+      <AdditionalIncludeDirectories>./</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -132,8 +108,6 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
-      <PrecompiledHeader>
-      </PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
@@ -148,10 +122,32 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
   </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>./</AdditionalIncludeDirectories>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeaderFile>Framework.h</PrecompiledHeaderFile>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+    <FxCompile>
+      <EntryPointName>VS</EntryPointName>
+    </FxCompile>
+    <FxCompile>
+      <ShaderType>Effect</ShaderType>
+    </FxCompile>
+    <FxCompile>
+      <ShaderModel>5.0</ShaderModel>
+    </FxCompile>
+  </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
-      <PrecompiledHeader>
-      </PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
@@ -168,12 +164,12 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="DX113D_2004.h" />
-    <ClInclude Include="Enviroment\Eviroment.h" />
+    <ClInclude Include="Environment\Camera.h" />
+    <ClInclude Include="Environment\Environment.h" />
     <ClInclude Include="Framework.h" />
     <ClInclude Include="Framework\Buffer\ConstBuffer.h" />
     <ClInclude Include="Framework\Buffer\GlobalBuffers.h" />
     <ClInclude Include="Framework\Buffer\IndexBuffer.h" />
-    <ClInclude Include="Framework\Camera\Camera.h" />
     <ClInclude Include="Framework\Math\Transform.h" />
     <ClInclude Include="Framework\Math\Vector3.h" />
     <ClInclude Include="Framework\Render\Material.h" />
@@ -186,28 +182,33 @@
     <ClInclude Include="Framework\Shader\Shader.h" />
     <ClInclude Include="Framework\Shader\VertexShader.h" />
     <ClInclude Include="Framework\State\RasterizerState.h" />
-    <ClInclude Include="Framework\Utility\Keyboard.h" />
+    <ClInclude Include="Framework\State\SamplerState.h" />
+    <ClInclude Include="Framework\Utility\BinaryReader.h" />
+    <ClInclude Include="Framework\Utility\BinaryWriter.h" />
+    <ClInclude Include="Framework\Utility\DirectWrite.h" />
+    <ClInclude Include="Framework\Utility\Control.h" />
     <ClInclude Include="Framework\Utility\Singleton.h" />
+    <ClInclude Include="Framework\Utility\Timer.h" />
     <ClInclude Include="Framework\Utility\Utility.h" />
+    <ClInclude Include="Framework\Utility\Xml.h" />
     <ClInclude Include="Objects\Basic\Cube.h" />
     <ClInclude Include="Program\Program.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="Scene\CubeScene.h" />
-    <ClInclude Include="Scene\CubetestScene.h" />
     <ClInclude Include="Scene\GridScene.h" />
     <ClInclude Include="Scene\Scene.h" />
     <ClInclude Include="targetver.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="DX113D_2004.cpp" />
-    <ClCompile Include="Enviroment\Eviroment.cpp" />
+    <ClCompile Include="Environment\Camera.cpp" />
+    <ClCompile Include="Environment\Environment.cpp" />
     <ClCompile Include="Framework.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="Framework\Buffer\ConstBuffer.cpp" />
     <ClCompile Include="Framework\Buffer\IndexBuffer.cpp" />
-    <ClCompile Include="Framework\Camera\Camera.cpp" />
     <ClCompile Include="Framework\Math\Transform.cpp" />
     <ClCompile Include="Framework\Math\Vector3.cpp" />
     <ClCompile Include="Framework\Render\Material.cpp" />
@@ -219,12 +220,17 @@
     <ClCompile Include="Framework\Shader\Shader.cpp" />
     <ClCompile Include="Framework\Shader\VertexShader.cpp" />
     <ClCompile Include="Framework\State\RasterizerState.cpp" />
-    <ClCompile Include="Framework\Utility\Keyboard.cpp" />
+    <ClCompile Include="Framework\State\SamplerState.cpp" />
+    <ClCompile Include="Framework\Utility\BinaryReader.cpp" />
+    <ClCompile Include="Framework\Utility\BinaryWriter.cpp" />
+    <ClCompile Include="Framework\Utility\DirectWrite.cpp" />
+    <ClCompile Include="Framework\Utility\Control.cpp" />
+    <ClCompile Include="Framework\Utility\Timer.cpp" />
     <ClCompile Include="Framework\Utility\Utility.cpp" />
+    <ClCompile Include="Framework\Utility\Xml.cpp" />
     <ClCompile Include="Objects\Basic\Cube.cpp" />
     <ClCompile Include="Program\Program.cpp" />
     <ClCompile Include="Scene\CubeScene.cpp" />
-    <ClCompile Include="Scene\CubetestScene.cpp" />
     <ClCompile Include="Scene\GridScene.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -236,13 +242,11 @@
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Shaders\Cube.hlsl">
-      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Effect</ShaderType>
-      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Effect</ShaderType>
-      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Vertex</ShaderType>
-      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Vertex</ShaderType>
       <EntryPointName Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">VS</EntryPointName>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Effect</ShaderType>
       <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">5.0</ShaderModel>
       <EntryPointName Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">VS</EntryPointName>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Vertex</ShaderType>
       <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">5.0</ShaderModel>
     </FxCompile>
     <FxCompile Include="Shaders\Grid.hlsl">
@@ -255,6 +259,9 @@
   <ItemGroup>
     <ProjectReference Include="..\DirectXTex\DirectXTex_Desktop_2019_Win10.vcxproj">
       <Project>{371b9fa9-4c90-4ac6-a123-aced756d6c77}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\ImGui\ImGui.vcxproj">
+      <Project>{a53068c4-811d-4c88-ae49-cc7d0734001f}</Project>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

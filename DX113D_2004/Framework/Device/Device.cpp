@@ -39,7 +39,7 @@ void Device::CreateDeviceAndSwapchain()
 		nullptr,
 		D3D_DRIVER_TYPE_HARDWARE,
 		0,
-		D3D11_CREATE_DEVICE_DEBUG,
+		D3D11_CREATE_DEVICE_DEBUG | D3D11_CREATE_DEVICE_BGRA_SUPPORT,
 		nullptr,
 		0,
 		D3D11_SDK_VERSION,
@@ -48,7 +48,7 @@ void Device::CreateDeviceAndSwapchain()
 		&device,
 		nullptr,
 		&deviceContext
-	));
+	));		
 }
 
 void Device::CreateBackBuffer()
@@ -57,7 +57,7 @@ void Device::CreateBackBuffer()
 
 	V(swapChain->GetBuffer(0, __uuidof(ID3D11Texture2D), (void**)&backBuffer));
 	V(device->CreateRenderTargetView(backBuffer, nullptr, &renderTargetView));
-	backBuffer->Release();
+	backBuffer->Release();	
 
 	ID3D11Texture2D* depthBuffer;
 

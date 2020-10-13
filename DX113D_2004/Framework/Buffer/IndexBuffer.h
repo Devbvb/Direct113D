@@ -9,5 +9,5 @@ public:
 	IndexBuffer(void* data, UINT count);
 	~IndexBuffer();
 
-	void IASet();
+	void IASet();	
 };

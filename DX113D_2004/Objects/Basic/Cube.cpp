@@ -1,6 +1,6 @@
 #include "Framework.h"
 
-Cube::Cube() 
+Cube::Cube()
 {
 	material = new Material(L"Cube");
 
@@ -11,12 +11,14 @@ Cube::~Cube()
 {
 	delete material;
 	delete mesh;
+
 }
 
 void Cube::Update()
-{
-	//rotation.x += 0.001f;
+{	
 	rotation.y += 0.001f;
+
+	Float3 r = rotation;
 
 	UpdateWorld();
 }
@@ -29,7 +31,7 @@ void Cube::Render()
 
 	material->Set();
 
-	DC->DrawIndexed(indices.size(), 0, 0);
+	DC->DrawIndexed((UINT)indices.size(), 0, 0);
 }
 
 void Cube::Create()
@@ -108,7 +110,6 @@ void Cube::Create()
 	indices.emplace_back(3);
 	indices.emplace_back(7);
 
-	mesh = new Mesh(vertices.data(), sizeof(VertexType), vertices.size(),
-		indices.data(), indices.size());
-
+	mesh = new Mesh(vertices.data(), sizeof(VertexType), (UINT)vertices.size(),
+		indices.data(), (UINT)indices.size());
 }

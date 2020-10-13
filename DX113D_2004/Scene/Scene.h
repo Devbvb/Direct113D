@@ -2,10 +2,8 @@
 
 class Scene
 {
-private:
-
 public:
-	virtual ~Scene() = default; //virtual ~Scene() {};
+	virtual ~Scene() = default;
 
 	virtual void Update() = 0;
 	virtual void PreRender() = 0;

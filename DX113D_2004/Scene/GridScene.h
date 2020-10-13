@@ -18,7 +18,6 @@ private:
 	Texture* texture;
 
 	RasterizerState* fillMode[2];
-
 public:
 	GridScene();
 	~GridScene();

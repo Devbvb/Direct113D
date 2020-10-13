@@ -9,14 +9,13 @@ private:
 	ID3D11InputLayout* inputLayout;
 
 	ID3D11ShaderReflection* reflection;
-
+	
 	VertexShader(wstring file, string entry);
 	~VertexShader();
 
-public:
+public:	
 	virtual void Set() override;
 
 private:
 	void CreateInputLayout();
-
 };

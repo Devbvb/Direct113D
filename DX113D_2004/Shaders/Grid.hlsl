@@ -15,13 +15,13 @@ cbuffer Projection : register(b2)
 
 struct VertexInput
 {
-    float4 pos : Position;
+    float4 pos : Position;   
     float2 uv : UV;
 };
 
 struct PixelInput
 {
-    float4 pos : SV_Position;
+    float4 pos : SV_Position;    
     float2 uv : UV;
 };
 

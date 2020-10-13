@@ -7,7 +7,7 @@ ConstBuffer::ConstBuffer(void* data, UINT dataSize)
 	desc.Usage = D3D11_USAGE_DYNAMIC;
 	desc.ByteWidth = dataSize;
 	desc.BindFlags = D3D11_BIND_CONSTANT_BUFFER;
-	desc.CPUAccessFlags = D3D11_CPU_ACCESS_WRITE;
+	desc.CPUAccessFlags = D3D11_CPU_ACCESS_WRITE;	
 
 	V(DEVICE->CreateBuffer(&desc, nullptr, &buffer));
 }
@@ -32,7 +32,6 @@ void ConstBuffer::SetVSBuffer(UINT slot)
 
 void ConstBuffer::SetPSBuffer(UINT slot)
 {
-
 	Update();
 	DC->PSSetConstantBuffers(slot, 1, &buffer);
 }

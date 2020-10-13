@@ -14,14 +14,14 @@ VertexShader::VertexShader(wstring file, string entry)
 		blob->GetBufferSize(), nullptr, &shader));
 
 	CreateInputLayout();
-	
+
 	blob->Release();
 }
 
 VertexShader::~VertexShader()
 {
 	shader->Release();
-	inputLayout->Release();
+	inputLayout->Release();	
 }
 
 void VertexShader::Set()
@@ -57,36 +57,36 @@ void VertexShader::CreateInputLayout()
 		{
 			if (paramDesc.ComponentType == D3D_REGISTER_COMPONENT_UINT32)
 				elementDesc.Format = DXGI_FORMAT_R32_UINT;
-			if (paramDesc.ComponentType == D3D_REGISTER_COMPONENT_SINT32)
+			else if (paramDesc.ComponentType == D3D_REGISTER_COMPONENT_SINT32)
 				elementDesc.Format = DXGI_FORMAT_R32_SINT;
-			if (paramDesc.ComponentType == D3D_REGISTER_COMPONENT_FLOAT32)
+			else if (paramDesc.ComponentType == D3D_REGISTER_COMPONENT_FLOAT32)
 				elementDesc.Format = DXGI_FORMAT_R32_FLOAT;
 		}
 		else if (paramDesc.Mask < 4)
 		{
 			if (paramDesc.ComponentType == D3D_REGISTER_COMPONENT_UINT32)
 				elementDesc.Format = DXGI_FORMAT_R32G32_UINT;
-			if (paramDesc.ComponentType == D3D_REGISTER_COMPONENT_SINT32)
+			else if (paramDesc.ComponentType == D3D_REGISTER_COMPONENT_SINT32)
 				elementDesc.Format = DXGI_FORMAT_R32G32_SINT;
-			if (paramDesc.ComponentType == D3D_REGISTER_COMPONENT_FLOAT32)
+			else if (paramDesc.ComponentType == D3D_REGISTER_COMPONENT_FLOAT32)
 				elementDesc.Format = DXGI_FORMAT_R32G32_FLOAT;
 		}
 		else if (paramDesc.Mask < 8)
 		{
 			if (paramDesc.ComponentType == D3D_REGISTER_COMPONENT_UINT32)
 				elementDesc.Format = DXGI_FORMAT_R32G32B32_UINT;
-			if (paramDesc.ComponentType == D3D_REGISTER_COMPONENT_SINT32)
+			else if (paramDesc.ComponentType == D3D_REGISTER_COMPONENT_SINT32)
 				elementDesc.Format = DXGI_FORMAT_R32G32B32_SINT;
-			if (paramDesc.ComponentType == D3D_REGISTER_COMPONENT_FLOAT32)
+			else if (paramDesc.ComponentType == D3D_REGISTER_COMPONENT_FLOAT32)
 				elementDesc.Format = DXGI_FORMAT_R32G32B32_FLOAT;
 		}
 		else if (paramDesc.Mask < 16)
 		{
 			if (paramDesc.ComponentType == D3D_REGISTER_COMPONENT_UINT32)
 				elementDesc.Format = DXGI_FORMAT_R32G32B32A32_UINT;
-			if (paramDesc.ComponentType == D3D_REGISTER_COMPONENT_SINT32)
+			else if (paramDesc.ComponentType == D3D_REGISTER_COMPONENT_SINT32)
 				elementDesc.Format = DXGI_FORMAT_R32G32B32A32_SINT;
-			if (paramDesc.ComponentType == D3D_REGISTER_COMPONENT_FLOAT32)
+			else if (paramDesc.ComponentType == D3D_REGISTER_COMPONENT_FLOAT32)
 				elementDesc.Format = DXGI_FORMAT_R32G32B32A32_FLOAT;
 		}
 
@@ -97,8 +97,8 @@ void VertexShader::CreateInputLayout()
 		inputLayouts.emplace_back(elementDesc);
 	}
 
-	V(DEVICE->CreateInputLayout(inputLayouts.data(), inputLayouts.size(),
+	V(DEVICE->CreateInputLayout(inputLayouts.data(), (UINT)inputLayouts.size(),
 		blob->GetBufferPointer(), blob->GetBufferSize(), &inputLayout));
-
+	
 	reflection->Release();
 }
