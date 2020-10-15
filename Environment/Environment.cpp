@@ -33,7 +33,7 @@ void Environment::Set()
 	SetViewport();
 	SetProjection();
 	mainCamera->SetVS(1);
-	lightBuffer->SetVSBuffer(3);
+	lightBuffer->SetPSBuffer(0);
 }
 
 void Environment::SetProjection()

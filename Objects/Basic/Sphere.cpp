@@ -1,18 +1,17 @@
 #include "Framework.h"
 
-Sphere::Sphere(float radius, UINT stackCount, UINT sliceCount)
-	: radius(radius), stackCount(stackCount), sliceCount(sliceCount)
+Sphere::Sphere(wstring shaderFile, float radius, UINT sliceCount, UINT stackCount)
+	: radius(radius), sliceCount(sliceCount), stackCount(stackCount)
 {
-	material = new Material(L"Diffuse");
-	material->SetDiffuseMap(L"Textures/Landscape/Stones.png");
-
-	Create();
+	material = new Material(shaderFile);
+	
+	CreateMesh();
 }
 
 Sphere::~Sphere()
 {
-	delete material;
 	delete mesh;
+	delete material;
 }
 
 void Sphere::Update()
@@ -24,21 +23,24 @@ void Sphere::Update()
 
 void Sphere::Render()
 {
-	mesh->IASet();
+	mesh->IASet(); // mesh 셋팅
 
-	SetWorldBuffer();
+	SetWorldBuffer(); // 월드버퍼 세팅
 
-	material->Set();
+	material->Set(); //material 세팅
 
-	DC->DrawIndexed((UINT)indices.size(), 0, 0);
+	DC->DrawIndexed((UINT)indices.size(), 0, 0); // index크기만큼 넣어서 드로우
 }
 
-void Sphere::Create()
+void Sphere::CreateMesh()
 {
-	//반원을 몇개의 점으로 만들지
-	float phiStep = PI / stackCount; 
-	float thetaStep = 2.0f * PI / sliceCount;
+	//반원을 몇개의 점으로 만들지 
+	
+	//각도
+	float phiStep = XM_PI / stackCount;// stackCount는 가로               //XM_PI는 180도
+	float thetaStep = 2.0f * XM_PI / sliceCount; //sliceCount는 세로   //XM_2PI는 360도
 
+	//Vertex
 	for (UINT i = 0; i <= stackCount; i++)
 	{
 		float phi = i * phiStep; // z축의 양의 방향으로부터 원점과 p가 이루는 직선을 평면에 투영시킨 직선까지의 각
@@ -59,9 +61,10 @@ void Sphere::Create()
 			vertex.normal.y = cos(phi);
 			vertex.normal.z = sin(phi) * sin(theta);
 
-			vertex.position.x = vertex.normal.x * radius;
-			vertex.position.y = vertex.normal.y * radius;
-			vertex.position.z = vertex.normal.z * radius;
+			vertex.position = Vector3(vertex.normal) * radius;
+			//vertex.position.x = vertex.normal.x * radius;
+			//vertex.position.y = vertex.normal.y * radius;
+			//vertex.position.z = vertex.normal.z * radius;
 
 			vertex.uv.x = (float)j / sliceCount;
 			vertex.uv.y = (float)i / stackCount;
@@ -69,7 +72,8 @@ void Sphere::Create()
 			vertices.emplace_back(vertex);
 		}
 	}
-
+	
+	//Index
 	for (UINT i = 0; i < stackCount; i++)
 	{
 		for (UINT j = 0; j < sliceCount; j++)
@@ -84,31 +88,7 @@ void Sphere::Create()
 		}
 	}
 
-	CreateNormal();
-
+	//mesh 생성
 	mesh = new Mesh(vertices.data(), sizeof(VertexType), (UINT)vertices.size(),
 		indices.data(), (UINT)indices.size());
-}
-
-void Sphere::CreateNormal()
-{
-	for (UINT i = 0; i < indices.size() / 3; i++)
-	{
-		UINT index0 = indices[i * 3 + 0];
-		UINT index1 = indices[i * 3 + 1];
-		UINT index2 = indices[i * 3 + 2];
-
-		Vector3 v0 = vertices[index0].position;
-		Vector3 v1 = vertices[index1].position;
-		Vector3 v2 = vertices[index2].position;
-
-		Vector3 A = v1 - v0;
-		Vector3 B = v2 - v0;
-
-		Vector3 normal = Vector3::Cross(A, B).Normal();
-
-		vertices[index0].normal = normal;
-		vertices[index1].normal = normal;
-		vertices[index2].normal = normal;
-	}
 }

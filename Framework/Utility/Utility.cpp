@@ -13,3 +13,10 @@ wstring Utility::ToWString(string value)
     temp.assign(value.begin(), value.end());
     return temp;
 }
+
+wstring Utility::GetExtension(wstring path)
+{
+    size_t index = path.find_last_of('.');
+
+    return path.substr(index + 1, path.length());
+}

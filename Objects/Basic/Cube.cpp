@@ -2,7 +2,7 @@
 
 Cube::Cube()
 {
-	material = new Material(L"Diffuse");
+	material = new Material(L"Specular");
 	material->SetDiffuseMap(L"Textures/test.jpg");
 
 	Create();

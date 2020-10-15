@@ -3,7 +3,7 @@
 Terrain::Terrain()
 	: width(10), height(10)
 {
-	material = new Material(L"Diffuse");
+	material = new Material(L"Specular");
 	material->SetDiffuseMap(L"Textures/Landscape/Dirt2.png");
 
 	fillMode[0] = new RasterizerState();

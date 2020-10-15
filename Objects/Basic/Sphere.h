@@ -11,18 +11,19 @@ private:
 	vector<VertexType> vertices;
 	vector<UINT> indices;
 
-	float radius;
-	UINT stackCount;
 	UINT sliceCount;
-
+	UINT stackCount;
+	float radius;
+	
 public:
-	Sphere(float radius, UINT stackCount = 20, UINT sliceCount = 20);
+	Sphere(wstring shaderFile, float radius = 1.0f, 
+		UINT sliceCount = 20 , UINT stackCount = 10);
 	~Sphere();
 
 	void Update();
 	void Render();
 
+	Material* GetMaterial() { return material; }
 private:
-	void Create();
-	void CreateNormal();
+	void CreateMesh();
 };

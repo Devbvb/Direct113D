@@ -1,6 +1,6 @@
 #pragma once
 
-class Cube : public Transform
+class Terrain : public Transform
 {
 private:
 	typedef VertexUVNormal VertexType;
@@ -10,15 +10,23 @@ private:
 
 	vector<VertexType> vertices;
 	vector<UINT> indices;
+
+	UINT width, height;
+
+	Texture* heightMap;
+
+	RasterizerState* fillMode[2];
+
 public:
-	Cube();	
-	~Cube();
+	Terrain();
+	~Terrain();
 
-	void Update();
+	void Update();	
 	void Render();
-
+	
 	Material* GetMaterial() { return material; }
 private:
-	void Create();
+	void CreateMesh();	
 	void CreateNormal();
 };
+

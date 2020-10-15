@@ -3,7 +3,7 @@
 Camera::Camera()
 	: moveSpeed(20.0f), rotSpeed(5.0f)
 {
-	viewBuffer = new MatrixBuffer(); //인스턴싱 (viewBuffer 는 인스턴스)
+	viewBuffer = new ViewBuffer(); //인스턴싱 (viewBuffer 는 인스턴스)
 	oldPos = MOUSEPOS;
 }
 
