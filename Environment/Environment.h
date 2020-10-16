@@ -28,6 +28,8 @@ public:
 	void SetViewport(UINT width = WIN_WIDTH, UINT height = WIN_HEIGHT);
 
 	Camera* GetMainCamera() { return mainCamera; }
+	Matrix GetProjection() { return projection; }
+
 private:
 	void CreatePerspective();
 	

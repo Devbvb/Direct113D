@@ -3,7 +3,7 @@
 class Sphere : public Transform
 {
 private:
-	typedef VertexUVNormal VertexType;
+	typedef VertexUVNormalTangent VertexType;
 
 	Material* material;
 	Mesh* mesh;
@@ -24,6 +24,8 @@ public:
 	void Render();
 
 	Material* GetMaterial() { return material; }
+
+	void CreateTangent();
 private:
 	void CreateMesh();
 };

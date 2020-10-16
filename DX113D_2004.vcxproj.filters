@@ -246,6 +246,7 @@
     <FxCompile Include="Shaders\Grid.hlsl" />
     <FxCompile Include="Shaders\Diffuse.hlsl" />
     <FxCompile Include="Shaders\Specular.hlsl" />
+    <FxCompile Include="Shaders\NormalMapping.hlsl" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Shaders\Header.hlsli" />

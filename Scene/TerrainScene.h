@@ -7,6 +7,7 @@ private:
 	Cube* cube;
 	Sphere* sphere;
 
+	Vector3 pickingPos;
 public:
 	TerrainScene();
 	~TerrainScene();

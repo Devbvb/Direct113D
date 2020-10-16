@@ -23,6 +23,8 @@ public:
 
 	void Update();	
 	void Render();
+
+	bool Picking(OUT Vector3* position);
 	
 	Material* GetMaterial() { return material; }
 private:

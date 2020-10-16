@@ -26,19 +26,24 @@ cbuffer Material : register(b1)
     float3 mDiffuse;
     float padding1;
     
-    float3 mSpeccular;
+    float3 mSpecular;
     float padding2;
     
     float3 mAmbient;
     float padding3;
     
     float shininess;
+    
+    int hasDiffuseMap;
+    int hasSpecularMap;
+    int hasNormalMap;
 }
 
 SamplerState samp : register(s0);
 
 Texture2D diffuseMap : register(t0);
 Texture2D specularMap : register(t1);
+Texture2D normalMap : register(t2);
 
 
 //Vertex Layouts
@@ -58,4 +63,12 @@ struct VertexUVNormal
     float4 pos : Position;
     float2 uv : UV;
     float3 normal : Normal;
+};
+
+struct VertexUVNormalTangent
+{
+    float4 pos : Position;
+    float2 uv : UV;
+    float3 normal : Normal;
+    float3 tangent : Tangent;
 };

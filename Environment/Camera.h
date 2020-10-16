@@ -1,5 +1,11 @@
 #pragma once
 
+struct Ray
+{
+	Vector3 position;
+	Vector3 direction;	
+};
+
 class Camera : public Transform
 {
 private:
@@ -34,6 +40,7 @@ private:
 	Matrix view;
 
 	Vector3 oldPos;
+
 public:
 	Camera();
 	~Camera();
@@ -47,4 +54,6 @@ public:
 	void PostRender();
 
 	void SetVS(UINT slot = 1);
+
+	Ray ScreenPointToRay(Vector3 pos);
 };

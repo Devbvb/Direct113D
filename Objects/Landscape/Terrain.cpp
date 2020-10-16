@@ -42,6 +42,45 @@ void Terrain::Render()
 	//fillMode[0]->SetState();
 }
 
+bool Terrain::Picking(OUT Vector3* position)
+{
+	Ray ray = CAMERA->ScreenPointToRay(MOUSEPOS);
+
+	for (UINT z = 0; z < height; z++)
+	{
+		for (UINT x = 0; x < width; x++)
+		{
+			UINT index[4];
+			index[0] = (width + 1) * z + x;
+			index[1] = (width + 1) * z + x + 1;
+			index[2] = (width + 1) * (z + 1) + x;
+			index[3] = (width + 1) * (z + 1) + x + 1;
+
+			Vector3 p[4];
+			for (UINT i = 0; i < 4; i++)			
+				p[i] = vertices[index[i]].position;
+
+			float distance;
+			if (Intersects(ray.position.data, ray.direction.data,
+				p[0].data, p[1].data, p[2].data, distance))
+			{
+				*position = ray.position + ray.direction * distance;
+				return true;
+			}
+
+			if (Intersects(ray.position.data, ray.direction.data,
+				p[3].data, p[1].data, p[2].data, distance))
+			{
+				*position = ray.position + ray.direction * distance;
+				return true;
+			}
+
+		}
+	}
+
+	return false;
+}
+
 void Terrain::CreateMesh()
 {
 	width = heightMap->Width() - 1;

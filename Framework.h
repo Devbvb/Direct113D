@@ -13,6 +13,7 @@
 #define WIN_START_Y 30
 
 #define PI 3.141592654f
+#define LERP(s, e, t) (s + (e - s) * t)
 
 #ifdef NDEBUG
 	#define V(hr) hr
@@ -44,6 +45,7 @@
 #include <d3d11.h>
 #include <DirectXMath.h>
 #include <d3dcompiler.h>
+#include <DirectXCollision.h>
 
 #pragma comment(lib, "d3d11.lib")
 #pragma comment(lib, "d3dcompiler.lib")
@@ -66,12 +68,14 @@
 
 using namespace DirectX;
 using namespace std;
+using namespace DirectX::TriangleTests;
 
 typedef XMFLOAT4 Float4;
 typedef XMFLOAT3 Float3;
 typedef XMFLOAT2 Float2;
 typedef XMVECTOR Vector4;
 typedef XMMATRIX Matrix;
+typedef XMFLOAT4X4 Float4x4;
 
 const XMVECTORF32 kRight = { 1, 0, 0 };
 const XMVECTORF32 kUp = { 0, 1, 0 };
